@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="contentSection">
+    <div class="grid-row align-items-center no-gutters">
+      <div class="grid-col-sm-6">
+        <div class="leftSection"> <img src="../../assets/images/-e-coffee.png" class="img-fluid" alt=""> </div>
+      </div>
+      <div class="grid-col-sm-6">
+        <div class="rightSection"> <img src="../../assets/images/-e-pen.png" alt="">
+          <h1>כניסה למערכת <br>
+            חתימה על מסמכים</h1>
+          <form *ngIf="step ==1 || step ==2" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label> <span>הזן מספר זיהוי / דרכון</span></label>
+              <mat-radio-group aria-label="Select an option" formControlName="role" name="role">
+                <mat-radio-button value="role1"></mat-radio-button>
+                <label> <span>&nbsp;</span><strong>ת”ז</strong> </label>
+                <mat-radio-button value="role2"></mat-radio-button>
+                <label><span>&nbsp;</span><strong>דרכון</strong> </label>
+              </mat-radio-group>
+              <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                <div *ngIf="f.role.errors.required">role is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" formControlName="number" placeholder="מספר בן 9 ספרות כולל ספרת ביקורת"
+                  maxlength='9' class="form-control" [ngClass]="{ 'is-invalid': submitted && f.number.errors }" />
+              </mat-form-field>
+              <div *ngIf="submitted && f.number.errors" class="invalid-feedback">
+                <div *ngIf="f.number.errors.required">number is required</div>
+                <div *ngIf="f.number.errors.minlength">number must be at least 9 characters</div>
+              </div>
+            </div>
+            <div *ngIf="step ==2" class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" formControlName="proposalNumber" placeholder="הזן מספר הצעה" maxlength='9'
+                  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.proposalNumber.errors }" />
+              </mat-form-field>
+              <div *ngIf="submitted && f.proposalNumber.errors" class="invalid-feedback">
+                <div *ngIf="f.proposalNumber.errors.required">proposalNumber is required</div>
+              </div>
+            </div>
+            <p class="terms">לאחר אישורך ישלח אלייך קוד אימות לנייד הרשום<br>
+              במערכת הבנק. בכל בעיה יש לפנות למוקד השירות <br>
+              בטלפון 5727* </p>
+            <p class="text-center">
+              <button type="submit" class="waves-effect waves-light btn-large"><i
+                  class="material-icons">המשך</i></button>
+            </p>
+          </form>
+
+          <div *ngIf="step ==3">
+            <p class="txtLarge">להשלמת התהליך לחץ על כפתור ‘שלח קוד’, וקבל קוד אימות לטלפון הנייד שברשותך, שמספרו
+              050-xxx6523</p>
+            <form [formGroup]="stepForm2" (ngSubmit)="submitAfterStep2()">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="checkbox" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f2.checkbox.errors }" class="filled-in" checked="checked" />
+                  <span>&nbsp;</span><strong>מעוניין בקבלת קוד אימות קולי <br>
+                    בשיחה נכנסת</strong> </label>
+              </div>
+              <div *ngIf="submitted && f2.checkbox.errors" class="invalid-feedback">
+                <div *ngIf="f2.checkbox.errors.required">please select the checkbox</div>
+              </div>
+              <p class="text-center">
+                <button type="submit" class="waves-effect waves-light btn-large"><i class="material-icons">שלח
+                    קוד</i></button>
+              </p>
+            </form>
+          </div>
+          <div *ngIf="step ==4">
+            <p class="txtLarge">הזן את הקוד שנשלח:</p>
+            <form [formGroup]="stepForm3" (ngSubmit)="submitAfterStep3()">
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input matInput type="text" formControlName="verificationCode"
+                    placeholder="מספר בן 9 ספרות כולל ספרת ביקורת" maxlength='9' class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f3.verificationCode.errors }" />
+                </mat-form-field>
+                <div *ngIf="submitted && f3.verificationCode.errors" class="invalid-feedback">
+                  <div *ngIf="f3.verificationCode.errors.required">verification code is required</div>
+                </div>
+              </div>
+              <p>&nbsp;</p>
+              <p class="text-center">
+                <button type="submit" class="waves-effect waves-light btn-large"><i
+                    class="material-icons">התחבר</i></button>
+              </p>
+            </form>
+          </div>
+          <div *ngIf="step ==5">
+            <p class="txtLarge">להשלמת התהליך לחץ על כפתור ‘שלח קוד’, וקבל קוד אימות לטלפון הנייד שברשותך, שמספרו
+              050-xxx6523</p>
+            <form [formGroup]="stepForm4" (ngSubmit)="submitAfterStep4()">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="checkbox1" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f4.checkbox1.errors }" class="filled-in"
+                    checked="checked" />
+
+                  <span>&nbsp;</span><strong>מעוניין בקבלת קוד אימות קולי <br>
+                    בשיחה נכנסת</strong> </label>
+              </div>
+              <div *ngIf="submitted && f4.checkbox1.errors" class="invalid-feedback">
+                <div *ngIf="f4.checkbox1.errors.required">please select the checkbox</div>
+              </div>
+
+
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="checkbox2" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f4.checkbox2.errors }" class="filled-in"
+                    checked="checked" />
+
+                  <span>&nbsp;</span><strong>מעוניין בקבלת קוד אימות קולי <br>
+                    בשיחה נכנסת</strong> </label>
+              </div>
+              <div *ngIf="submitted && f4.checkbox2.errors" class="invalid-feedback">
+                <div *ngIf="f4.checkbox2.errors.required">please select the checkbox</div>
+              </div>
+
+
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="checkbox3" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f4.checkbox3.errors }" class="filled-in"
+                    checked="checked" />
+
+                  <span>&nbsp;</span><strong>מעוניין בקבלת קוד אימות קולי <br>
+                    בשיחה נכנסת</strong> </label>
+              </div>
+              <div *ngIf="submitted && f4.checkbox3.errors" class="invalid-feedback">
+                <div *ngIf="f4.checkbox3.errors.required">please select the checkbox</div>
+              </div>
+              <p class="text-center">
+                <button type="submit" class="waves-effect waves-light btn-large"><i class="material-icons">שלח
+                    קוד</i></button>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
